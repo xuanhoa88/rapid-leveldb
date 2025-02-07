@@ -51,7 +51,7 @@
     "eslint": "8.57.1",
     "eslint-config-prettier": "8.10.0",
     "eslint-plugin-prettier": "5.2.1",
-    "glob": "9.3.5",
+    "glob": "11.0.1",
     "mkfiletree": "2.0.0",
     "nyc": "15.1.0",
     "prebuildify": "6.0.1",
