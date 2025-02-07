@@ -1,0 +1,53 @@
+deps/leveldb/leveldb-basho/
+deps/leveldb/leveldb-hyper/
+deps/leveldb/leveldb-rocksdb/
+deps/leveldb/leveldb-*/doc/
+deps/leveldb/leveldb-*/README.md
+deps/leveldb/leveldb-*/CONTRIBUTING.md
+deps/leveldb/leveldb-*/port/README
+deps/snappy/snappy/testdata/
+deps/snappy/snappy/.appveyor.yml
+deps/snappy/snappy/.git
+deps/snappy/snappy/.travis.yml
+deps/snappy/snappy/CONTRIBUTING.md
+deps/snappy/snappy/README.md
+deps/snappy/snappy/*.txt
+README
+INSTALL
+NEWS
+AUTHORS
+TODO
+
+# Build artifacts
+deps/*/Release/
+deps/*/Debug/
+*.tar.gz
+bin/
+dist/
+build/
+build-pre-gyp/
+libleveldb.so
+libleveldb.a
+*.sln
+*.vcxproj
+*.vcxproj.filters
+.vscode
+
+# Benchmarks and tests
+test/
+.benchmarks/
+*.csv
+
+# Misc
+.nyc_output/
+yarn.lock
+.gitmodules
+.github
+.travis.yml
+appveyor.yml
+tsconfig.json
+
+# Unknown
+leakydb
+test-data.tar
+test-data.db.tar
