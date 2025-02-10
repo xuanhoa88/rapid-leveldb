@@ -3,17 +3,22 @@
   "version": "2.0.0",
   "description": "An abstract-level database backed by LevelDB",
   "license": "MIT",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "gypfile": true,
   "homepage": "https://github.com/xuanhoa88/rapid-leveldb",
   "keywords": [
     "leveldb",
     "level"
   ],
+  "exports": {
+    ".": {
+      "default": "./src/index.js",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
   "scripts": {
     "install": "node-gyp-build",
-    "postinstall": "tsc --build",
     "test": "(nyc -s tape test/*-test.js | tap-arc) && nyc report",
     "test:pessimistic": "tape test/*-test.js | tap-arc -pv",
     "test:gc": "node --expose-gc test/gc.js",
@@ -22,7 +27,7 @@
     "lint": "eslint '**/*.js'",
     "lint:fix": "npm run lint -- --fix",
     "coverage": "nyc report -r lcovonly",
-    "rebuild": "npm run install --build-from-source",
+    "rebuild": "npm run install --build-from-source && tsc --build",
     "prebuild": "prebuildify --napi --strip",
     "prebuild:download": "prebuildify-ci download",
     "prebuild:linux-arm": "prebuildify-cross -i linux-armv6 -i linux-armv7 -i linux-arm64-lts --napi --strip",
