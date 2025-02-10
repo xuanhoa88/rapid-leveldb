@@ -12,7 +12,8 @@
     "level"
   ],
   "scripts": {
-    "install": "node-gyp-build && tsc --build",
+    "install": "node-gyp-build",
+    "postinstall": "tsc --build",
     "test": "(nyc -s tape test/*-test.js | tap-arc) && nyc report",
     "test:pessimistic": "tape test/*-test.js | tap-arc -pv",
     "test:gc": "node --expose-gc test/gc.js",
