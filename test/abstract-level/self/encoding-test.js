@@ -327,8 +327,6 @@ for (const deferred of [false, true]) {
 
   // NOTE: adapted from encoding-down
   test(`clear() receives keyEncoding option (deferred: ${deferred})`, async function (t) {
-    t.plan(1);
-
     const db = mockLevel(
       {
         async _clear(options) {
@@ -343,8 +341,6 @@ for (const deferred of [false, true]) {
   });
 
   test(`clear() takes keyEncoding option (deferred: ${deferred})`, async function (t) {
-    t.plan(1);
-
     const db = mockLevel(
       {
         async _clear(options) {

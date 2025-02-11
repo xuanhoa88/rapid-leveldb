@@ -7,7 +7,7 @@ const {
   AbstractIterator,
   AbstractKeyIterator,
   AbstractValueIterator,
-} = require('../../../src/abstract');
+} = require('../../../src/abstract-level');
 
 class NoopLevel extends AbstractLevel {
   constructor(...args) {
@@ -202,8 +202,6 @@ test('sublevel name and options', function (t) {
 
   // See https://github.com/Level/subleveldown/issues/78
   t.test('doubly nested sublevel has correct prefix', async function (t) {
-    t.plan(1);
-
     const keys = [];
     class MockLevel extends AbstractLevel {
       async _put(key) {
@@ -513,8 +511,6 @@ test('opening & closing sublevel', function (t) {
     t.test(
       `error from sublevel.${mode}() bubbles up (default implementation: ${def})`,
       async function (t) {
-        t.plan(1);
-
         class MockLevel extends AbstractLevel {
           [privateMethod](options) {
             return new MockIterator(this, options);

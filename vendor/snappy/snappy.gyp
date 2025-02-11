@@ -50,7 +50,7 @@
           "VCCLCompilerTool": {
             "RuntimeTypeInfo": "false",
             "EnableFunctionLevelLinking": "true",
-            "ExceptionHandling": "2",
+            "ExceptionHandling": "1",
             "DisableSpecificWarnings": [ "4355", "4530" ,"4267", "4244", "4506", "4018" ]
           }
         }
@@ -58,7 +58,8 @@
       ["OS == 'linux'", {
         "cflags": [
           "-Wno-sign-compare",
-          "-Wno-unused-function"
+          "-Wno-unused-function",
+          "-std=c++14"
         ],
         "cflags!": [ "-fno-tree-vrp" ]
       }],
@@ -81,6 +82,7 @@
         ]
       }],
       ["OS == 'mac'", {
+        "cflags+": ["-fvisibility=hidden", "-std=c++14"],
         "xcode_settings": {
           "WARNING_CFLAGS": [
             "-Wno-sign-compare",
@@ -94,7 +96,10 @@
           "OTHER_CFLAGS": [
             "-arch x86_64",
             "-arch arm64"
-          ]
+          ],
+
+          "CLANG_CXX_LANGUAGE_STANDARD": "c++14",
+          "CLANG_CXX_LIBRARY": "libc++"
         }
       }],
       ["OS == 'android'", {

@@ -247,13 +247,14 @@ exports.open = function (test, testCommon) {
   }
 
   test('passive open()', async function (t) {
-    t.plan(1);
     const db = testCommon.factory();
     await db.open({ passive: true }); // OK, already opening
     await db.close();
-    await db.open({ passive: true }).catch(err => {
+    try {
+      await db.open({ passive: true });
+    } catch (err) {
       t.is(err.code, 'LEVEL_DATABASE_NOT_OPEN');
-    });
+    }
     await db.open();
     await db.open({ passive: true }); // OK, already open
     return db.close();

@@ -17,7 +17,7 @@ import {
   AbstractValueIterator,
   AbstractValueIteratorOptions,
   Transcoder,
-} from './abstract';
+} from './abstract-level';
 
 /**
  * An {@link AbstractLevel} database backed by

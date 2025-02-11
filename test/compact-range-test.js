@@ -11,7 +11,7 @@ test('compactRange() setup', async function () {
 });
 
 test('compactRange() throws if arguments are missing', async function (t) {
-  t.plan(2 * 2);
+  t.plan(4);
 
   for (const args of [[], ['foo']]) {
     try {
@@ -46,8 +46,6 @@ test('compactRange() teardown', async function () {
 });
 
 test('compactRange() yields error if db is closed', async function (t) {
-  t.plan(1);
-
   try {
     await db.compactRange('foo', 'foo');
   } catch (err) {

@@ -2,7 +2,7 @@
 'use strict';
 
 const test = require('tape');
-const { DeferredQueue } = require('../../lib/deferred-queue');
+const { DeferredQueue } = require('../../../src/abstract-level/lib/deferred-queue');
 const supported = !!globalThis.AbortController;
 
 test('DeferredQueue calls operations in FIFO order', async function (t) {

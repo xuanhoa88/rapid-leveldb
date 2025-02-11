@@ -18,8 +18,6 @@ exports.setup = function (test, testCommon) {
 exports.asyncIterator = function (test, testCommon) {
   for (const mode of ['iterator', 'keys', 'values']) {
     test(`for await...of ${mode}()`, async function (t) {
-      t.plan(1);
-
       const it = db[mode]({ keyEncoding: 'utf8', valueEncoding: 'utf8' });
       const output = [];
 
@@ -37,8 +35,6 @@ exports.asyncIterator = function (test, testCommon) {
 
     testCommon.supports.permanence &&
       test(`for await...of ${mode}() (deferred)`, async function (t) {
-        t.plan(1);
-
         const db = testCommon.factory();
         await db.batch(input.map(entry => ({ ...entry, type: 'put' })));
         await db.close();

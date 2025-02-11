@@ -264,8 +264,6 @@ exports.clear = function (test, testCommon) {
 
 exports.cleanup = function (test, testCommon) {
   test('snapshot is closed on database close', async function (t) {
-    t.plan(1);
-
     const db = testCommon.factory();
     await db.open();
     const snapshot = db.snapshot();
@@ -351,8 +349,6 @@ function testFactory(test, testCommon) {
 
   const testClose = function (name, run) {
     testFresh(`${name} after closing snapshot`, async function (t, db) {
-      t.plan(1);
-
       const snapshot = db.snapshot();
       await snapshot.close();
 
@@ -364,8 +360,6 @@ function testFactory(test, testCommon) {
     });
 
     testFresh(`${name} while closing snapshot`, async function (t, db) {
-      t.plan(1);
-
       const snapshot = db.snapshot();
       const promise = snapshot.close();
 

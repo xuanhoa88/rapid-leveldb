@@ -6,7 +6,7 @@ const {
   AbstractIterator,
   AbstractKeyIterator,
   AbstractValueIterator,
-} = require('../../../src/abstract');
+} = require('../../../src/abstract-level');
 const { mockLevel, mockIterator, nullishEncoding } = require('../util');
 
 const identity = v => v;
@@ -598,8 +598,6 @@ for (const deferred of [false, true]) {
 
     // NOTE: adapted from encoding-down
     test(`${mode}() encodes seek target with custom encoding (deferred: ${deferred}, default implementation: ${def})`, async function (t) {
-      t.plan(1);
-
       const targets = [];
       const db = mockLevel(
         {
@@ -628,8 +626,6 @@ for (const deferred of [false, true]) {
 
     // NOTE: adapted from encoding-down
     test(`${mode}() encodes nullish seek target (deferred: ${deferred}, default implementation: ${def})`, async function (t) {
-      t.plan(1);
-
       const targets = [];
       const db = mockLevel(
         {

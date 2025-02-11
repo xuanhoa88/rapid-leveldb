@@ -10,8 +10,6 @@ module.exports = function (test, testCommon) {
       // db.put() and db.del() do not support the sublevel option
       for (const withSublevel of method === 'singular' ? [false] : [false, true]) {
         test(`db emits write event for ${method} put operation (deferred: ${deferred}, sublevel: ${withSublevel})`, async function (t) {
-          t.plan(1);
-
           const db = testCommon.factory();
           const sublevel = withSublevel ? db.sublevel('abc') : null;
 
@@ -68,8 +66,6 @@ module.exports = function (test, testCommon) {
         });
 
         test(`db emits write event for ${method} del operation (deferred: ${deferred}, sublevel: ${withSublevel})`, async function (t) {
-          t.plan(1);
-
           const db = testCommon.factory();
           const sublevel = withSublevel ? db.sublevel('abc') : null;
 
@@ -123,8 +119,6 @@ module.exports = function (test, testCommon) {
 
     for (const method of batchMethods) {
       test(`db emits write event for multiple ${method} operations (deferred: ${deferred})`, async function (t) {
-        t.plan(1);
-
         const db = testCommon.factory();
         if (!deferred) await db.open();
 

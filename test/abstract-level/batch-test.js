@@ -7,83 +7,94 @@ let db;
 exports.setUp = function (test, testCommon) {
   test('batch([]) setup', async function () {
     db = testCommon.factory();
-    return db.open();
+    await db.open();
+    return db;
   });
 };
 
 exports.args = function (test) {
-  test('batch([]) with missing value fails', function (t) {
-    t.plan(1);
-
-    db.batch([{ type: 'put', key: 'foo1' }]).catch(err => {
+  test('batch([]) with missing value fails', async function (t) {
+    try {
+      await db.batch([{ type: 'put', key: 'foo1' }]);
+    } catch (err) {
       t.is(err.code, 'LEVEL_INVALID_VALUE', 'correct error code');
-    });
+    }
   });
 
-  test('batch([]) with illegal values fails', function (t) {
+  test('batch([]) with illegal values fails', async function (t) {
     t.plan(illegalValues.length * 2);
 
     for (const { name, value } of illegalValues) {
-      db.batch([{ type: 'put', key: 'foo1', value }]).catch(function (err) {
+      try {
+        await db.batch([{ type: 'put', key: 'foo1', value }]);
+      } catch (err) {
         t.ok(err instanceof Error, name + ' - is Error');
         t.is(err.code, 'LEVEL_INVALID_VALUE', name + ' - correct error code');
-      });
+      }
     }
   });
 
-  test('batch([]) with missing key fails', function (t) {
-    t.plan(1);
-
-    db.batch([{ type: 'put', value: 'foo1' }]).catch(function (err) {
+  test('batch([]) with missing key fails', async function (t) {
+    try {
+      await db.batch([{ type: 'put', value: 'foo1' }]);
+    } catch (err) {
       t.is(err.code, 'LEVEL_INVALID_KEY', 'correct error code');
-    });
+    }
   });
 
-  test('batch([]) with illegal keys fails', function (t) {
+  test('batch([]) with illegal keys fails', async function (t) {
     t.plan(illegalKeys.length * 2);
 
     for (const { name, key } of illegalKeys) {
-      db.batch([{ type: 'put', key, value: 'foo1' }]).catch(function (err) {
+      try {
+        await db.batch([{ type: 'put', key, value: 'foo1' }]);
+      } catch (err) {
         t.ok(err instanceof Error, name + ' - is Error');
         t.is(err.code, 'LEVEL_INVALID_KEY', name + ' - correct error code');
-      });
+      }
     }
   });
 
-  test('batch([]) with missing or incorrect type fails', function (t) {
+  test('batch([]) with missing or incorrect type fails', async function (t) {
     t.plan(4);
 
-    db.batch([{ key: 'key', value: 'value' }]).catch(function (err) {
+    try {
+      await db.batch([{ key: 'key', value: 'value' }]);
+    } catch (err) {
       t.is(err.name, 'TypeError');
       t.is(
         err.message,
         "A batch operation must have a type property that is 'put' or 'del'",
         'correct error message'
       );
-    });
+    }
 
-    db.batch([{ key: 'key', value: 'value', type: 'foo' }]).catch(function (err) {
+    try {
+      await db.batch([{ key: 'key', value: 'value', type: 'foo' }]);
+    } catch (err) {
       t.is(err.name, 'TypeError');
       t.is(
         err.message,
         "A batch operation must have a type property that is 'put' or 'del'",
         'correct error message'
       );
-    });
+    }
   });
 
-  test('batch([]) with missing or nullish operations fails', function (t) {
-    t.plan(2 * 2);
+  test('batch([]) with missing or nullish operations fails', async function (t) {
+    t.plan(4);
 
     for (const array of [null, undefined]) {
-      db.batch(array).catch(function (err) {
+      try {
+        await db.batch(array);
+      } catch (err) {
         t.is(err.name, 'TypeError');
         t.is(
           err.message,
           "The first argument 'operations' must be an array",
           'correct error message'
         );
-      });
+      }
     }
   });
 
@@ -93,21 +104,20 @@ exports.args = function (test) {
     await db.batch([], undefined);
     await db.batch([], {});
   });
-  [null, undefined, 1, true].forEach(function (operation) {
+  for (const operation of [null, undefined, 1, true]) {
     const type = operation === null ? 'null' : typeof operation;
-
-    test(`batch([]) with ${type} operation fails`, function (t) {
-      t.plan(1);
-
-      db.batch([operation]).catch(function (err) {
+    test(`batch([]) with ${type} operation fails`, async function (t) {
+      try {
+        await db.batch(operation);
+      } catch (err) {
         // We can either explicitly check the type of the op and throw a TypeError,
         // or skip that for performance reasons in which case the next thing checked
         // will be op.key or op.type. Doesn't matter, because we've documented that
         // TypeErrors and such are not part of the semver contract.
         t.ok(err.name === 'TypeError' || err.code === 'LEVEL_INVALID_KEY');
-      });
+      }
     });
-  });
+  }
 };
 
 exports.batch = function (test, testCommon) {

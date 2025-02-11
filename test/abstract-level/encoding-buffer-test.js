@@ -60,17 +60,12 @@ exports.all = function (test, testCommon) {
     const enc = { keyEncoding: 'buffer', valueEncoding: 'buffer' };
     const [a, b] = ['🐄', '🐄 says moo'];
 
-    const promise1 = db.put(a, a).then(async () => {
-      const value = await db.get(Buffer.from(a), enc);
-      t.same(value, Buffer.from(a), 'got buffer value');
-    });
+    await db.put(a, a);
+    t.same(await db.get(Buffer.from(a), enc), Buffer.from(a), 'got buffer value');
 
-    const promise2 = db.put(Buffer.from(b), Buffer.from(b), enc).then(async () => {
-      const value = await db.get(b);
-      t.same(value, b, 'got string value');
-    });
+    await db.put(Buffer.from(b), Buffer.from(b));
+    t.same(await db.get(b), b, 'got string value');
 
-    await Promise.all([promise1, promise2]);
     return db.close();
   });
 

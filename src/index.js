@@ -1,6 +1,6 @@
 'use strict';
 
-const { AbstractLevel, AbstractSnapshot } = require('./abstract');
+const { AbstractLevel, AbstractSnapshot } = require('./abstract-level');
 const ModuleError = require('module-error');
 const fsp = require('fs/promises');
 const binding = require('./binding');

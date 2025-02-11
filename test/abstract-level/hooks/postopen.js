@@ -38,8 +38,6 @@ module.exports = function (test, testCommon) {
   });
 
   test('postopen hook functions are called sequentially', async function (t) {
-    t.plan(1);
-
     const db = testCommon.factory();
 
     let waited = false;
@@ -61,8 +59,6 @@ module.exports = function (test, testCommon) {
   });
 
   test('postopen hook function receives options from constructor', async function (t) {
-    t.plan(1);
-
     const db = testCommon.factory({ userland: 123 });
 
     db.hooks.postopen.add(async function (options) {
@@ -78,8 +74,6 @@ module.exports = function (test, testCommon) {
   });
 
   test('postopen hook function receives options from open()', async function (t) {
-    t.plan(1);
-
     const db = testCommon.factory();
 
     db.hooks.postopen.add(async function (options) {

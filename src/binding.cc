@@ -420,7 +420,7 @@ struct BaseWorker {
               Database* database,
               napi_deferred deferred,
               const char* resourceName)
-    : database_(database), errMsg_(NULL), deferred_(deferred) {
+    : database_(database), deferred_(deferred), errMsg_(NULL) {
     // Note: napi_deferred is a strong reference to the JS promise, so there's no need to
     // create a reference ourselves. See `v8_deferred = new v8::Persistent<v8::Value>()` in:
     // https://github.com/nodejs/node/commit/7efb8f7619100973877c660d0ee527ea3d92de8d

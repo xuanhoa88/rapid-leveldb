@@ -23,17 +23,17 @@
           "VCCLCompilerTool": {
             "RuntimeTypeInfo": "false",
             "EnableFunctionLevelLinking": "true",
-            "ExceptionHandling": "2",
+            "ExceptionHandling": "1",
             "DisableSpecificWarnings": [ "4355", "4530" ,"4267", "4244", "4506" ]
           }
         }
       }],
       ["OS == 'linux'", {
-        "cflags": [],
-        "cflags!": [ "-fno-tree-vrp"]
+        "cflags": ["-std=c++14"],
+        "cflags!": ["-fno-tree-vrp"]
       }],
       ["OS == 'mac'", {
-        "cflags+": ["-fvisibility=hidden"],
+        "cflags+": ["-fvisibility=hidden", "-std=c++14"],
         "xcode_settings": {
           # -fvisibility=hidden
           "GCC_SYMBOLS_PRIVATE_EXTERN": "YES",
@@ -50,11 +50,14 @@
           "OTHER_LDFLAGS": [
             "-arch x86_64",
             "-arch arm64"
-          ]
+          ],
+
+          "CLANG_CXX_LANGUAGE_STANDARD": "c++14",
+          "CLANG_CXX_LIBRARY": "libc++"
         }
       }],
       ["OS == 'android'", {
-        "cflags": [ "-fPIC" ],
+        "cflags": [ "-fPIC", "-std=c++14" ],
         "ldflags": [ "-fPIC" ],
         "cflags!": [
           "-fno-tree-vrp",

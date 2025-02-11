@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const { AbortError } = require('../../lib/errors');
+const { AbortError } = require('../../../src/abstract-level/lib/errors');
 
 test('AbortError', function (t) {
   const err = new AbortError();

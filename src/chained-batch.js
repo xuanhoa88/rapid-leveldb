@@ -1,6 +1,6 @@
 'use strict';
 
-const { AbstractChainedBatch } = require('./abstract');
+const { AbstractChainedBatch } = require('./abstract-level');
 const binding = require('./binding');
 
 const kContext = Symbol('context');

@@ -1,6 +1,6 @@
 'use strict';
 
-const { AbstractIterator } = require('./abstract');
+const { AbstractIterator } = require('./abstract-level');
 const binding = require('./binding');
 
 const kContext = Symbol('context');

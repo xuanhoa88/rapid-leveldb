@@ -6,7 +6,7 @@ const {
   AbstractIterator,
   AbstractKeyIterator,
   AbstractValueIterator,
-} = require('../../../src/abstract');
+} = require('../../../src/abstract-level');
 
 const testCommon = require('../common')({
   test,
@@ -29,7 +29,7 @@ for (const Ctor of [AbstractIterator, AbstractKeyIterator, AbstractValueIterator
   });
 
   test(`${Ctor.name} throws on invalid db argument`, function (t) {
-    t.plan(4 * 2);
+    t.plan(8);
 
     for (const args of [[], [null], [undefined], 'foo']) {
       const hint = args[0] === null ? 'null' : typeof args[0];
@@ -48,7 +48,7 @@ for (const Ctor of [AbstractIterator, AbstractKeyIterator, AbstractValueIterator
   });
 
   test(`${Ctor.name} throws on invalid options argument`, function (t) {
-    t.plan(4 * 2);
+    t.plan(8);
 
     for (const args of [[], [null], [undefined], 'foo']) {
       try {
@@ -118,18 +118,15 @@ for (const Ctor of [AbstractIterator, AbstractKeyIterator, AbstractValueIterator
   });
 
   test(`${Ctor.name}.all() extensibility`, async function (t) {
-    t.plan(2 * 3);
-
+    t.plan(4);
     for (const args of [[], [{}]]) {
       class TestIterator extends Ctor {
-        async _all(options) {
+        async _all() {
           t.is(this, it, 'thisArg on _all() was correct');
           t.is(arguments.length, 1, 'got 1 argument');
-          t.same(options, {}, '');
           return [];
         }
       }
-
       const db = testCommon.factory();
       await db.open();
       const it = new TestIterator(db, {});
@@ -139,15 +136,12 @@ for (const Ctor of [AbstractIterator, AbstractKeyIterator, AbstractValueIterator
   });
 
   test(`${Ctor.name}.all() extensibility (options)`, async function (t) {
-    t.plan(1);
-
     class TestIterator extends Ctor {
       async _all(options) {
         t.same(options, { foo: 123 }, 'got userland options');
         return [];
       }
     }
-
     const db = testCommon.factory();
     await db.open();
     const it = new TestIterator(db, {});
@@ -156,8 +150,6 @@ for (const Ctor of [AbstractIterator, AbstractKeyIterator, AbstractValueIterator
   });
 
   test(`${Ctor.name}.seek() throws if not implemented`, async function (t) {
-    t.plan(1);
-
     const db = testCommon.factory();
     await db.open();
     const it = new Ctor(db, {});

@@ -41,8 +41,6 @@ test('resource is closed on failed open', function (t) {
 
 for (const open of [true, false]) {
   test(`resource is closed on db.close() (explicit open: ${open})`, async function (t) {
-    t.plan(1);
-
     const db = mockLevel();
 
     const resource = {

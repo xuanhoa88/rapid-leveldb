@@ -5,12 +5,12 @@ const {
   DeferredIterator,
   DeferredKeyIterator,
   DeferredValueIterator,
-} = require('../../lib/deferred-iterator');
+} = require('../../../src/abstract-level/lib/deferred-iterator');
 const {
   AbstractIterator,
   AbstractKeyIterator,
   AbstractValueIterator,
-} = require('../../../src/abstract');
+} = require('../../../src/abstract-level');
 const { mockLevel } = require('../util');
 const noop = () => {};
 const identity = v => v;

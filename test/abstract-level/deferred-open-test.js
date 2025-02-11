@@ -1,6 +1,6 @@
 'use strict';
 
-const { DeferredIterator } = require('../../src/abstract/lib/deferred-iterator');
+const { DeferredIterator } = require('../../src/abstract-level/lib/deferred-iterator');
 
 exports.all = function (test, testCommon) {
   async function verifyValues(t, db, entries) {

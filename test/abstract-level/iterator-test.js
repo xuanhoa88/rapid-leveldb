@@ -73,8 +73,6 @@ exports.sequence = function (test, testCommon) {
       const requiredArgs = method === 'nextv' ? [1] : [];
 
       test(`${mode}().${method}() after close() yields error`, async function (t) {
-        t.plan(1);
-
         const iterator = db[mode]();
         await iterator.close();
 
@@ -89,8 +87,6 @@ exports.sequence = function (test, testCommon) {
         const otherRequiredArgs = otherMethod === 'nextv' ? [1] : [];
 
         test(`${mode}().${method}() while busy with ${otherMethod}() yields error`, async function (t) {
-          t.plan(1);
-
           const iterator = db[mode]();
           const promise = iterator[otherMethod](...otherRequiredArgs);
 

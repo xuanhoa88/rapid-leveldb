@@ -7,7 +7,7 @@ const {
   AbstractIterator,
   AbstractKeyIterator,
   AbstractValueIterator,
-} = require('../../src/abstract');
+} = require('../../src/abstract-level');
 
 const noop = function () {};
 

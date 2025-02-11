@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const { AbstractLevel, AbstractChainedBatch } = require('../../src/abstract');
+const { AbstractLevel, AbstractChainedBatch } = require('../../src/abstract-level');
 const { MinimalLevel, createSpy, isBuffer } = require('./util');
 const getRangeOptions = require('../lib/range-options');
 
@@ -36,7 +36,7 @@ test('test core extensibility', function (t) {
 });
 
 test('manifest is required', function (t) {
-  t.plan(3 * 2);
+  t.plan(6);
 
   const Test = implement(AbstractLevel);
 
@@ -445,16 +445,16 @@ test('batch([]) extensibility', async function (t) {
 });
 
 test('batch([]) with empty array is a noop', function (t) {
-  t.plan(1);
-
   const spy = createSpy();
   const Test = implement(AbstractLevel, { _batch: spy });
   const test = new Test({ encodings: { utf8: true } });
 
-  test.once('open', function () {
-    test.batch([]).then(function () {
+  test.once('open', async function () {
+    try {
+      await test.batch([]);
+    } catch (err) {
       t.is(spy.callCount, 0, '_batch() call was bypassed');
-    });
+    }
   });
 });
 
@@ -514,8 +514,6 @@ test('test chained batch() extensibility', async function (t) {
 });
 
 test('test chained batch() with no operations is a noop', function (t) {
-  t.plan(1);
-
   const spy = createSpy(async function () {});
   const Test = implement(AbstractLevel, { _batch: spy });
   const test = new Test({ encodings: { utf8: true } });
@@ -557,8 +555,6 @@ test('test AbstractChainedBatch extensibility', async function (t) {
 });
 
 test('test AbstractChainedBatch expects a db', function (t) {
-  t.plan(1);
-
   const Test = implement(AbstractChainedBatch);
 
   try {
@@ -696,7 +692,7 @@ test('test AbstractChainedBatch#clear() extensibility', function (t) {
 });
 
 test('test clear() extensibility', async function (t) {
-  t.plan(7 * 4 - 3);
+  t.plan(25);
 
   const spy = createSpy();
   const Test = implement(AbstractLevel, { _clear: spy });

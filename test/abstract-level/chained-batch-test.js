@@ -17,7 +17,7 @@ exports.args = function (test) {
   });
 
   test('chained batch.put() with missing or nullish value fails', async function (t) {
-    t.plan(3 * 2);
+    t.plan(6);
 
     for (const args of [[null], [undefined], []]) {
       const batch = db.batch();
@@ -34,7 +34,7 @@ exports.args = function (test) {
   });
 
   test('chained batch.put() with missing of nullish key fails', async function (t) {
-    t.plan(3 * 2);
+    t.plan(6);
 
     for (const args of [[], [null, 'foo'], [undefined, 'foo']]) {
       const batch = db.batch();
@@ -51,7 +51,7 @@ exports.args = function (test) {
   });
 
   test('chained batch.del() with missing or nullish key fails', async function (t) {
-    t.plan(3 * 2);
+    t.plan(6);
 
     for (const args of [[null], [undefined], []]) {
       const batch = db.batch();
@@ -72,8 +72,6 @@ exports.args = function (test) {
   });
 
   test('chained batch.put() after write() fails', async function (t) {
-    t.plan(1);
-
     const batch = db.batch().put('foo', 'bar');
     await batch.write();
 
@@ -85,8 +83,6 @@ exports.args = function (test) {
   });
 
   test('chained batch.del() after write() fails', async function (t) {
-    t.plan(1);
-
     const batch = db.batch().put('foo', 'bar');
     await batch.write();
 
@@ -98,8 +94,6 @@ exports.args = function (test) {
   });
 
   test('chained batch.clear() after write() fails', async function (t) {
-    t.plan(1);
-
     const batch = db.batch().put('foo', 'bar');
     await batch.write();
 
@@ -111,8 +105,6 @@ exports.args = function (test) {
   });
 
   test('chained batch.write() after write() fails', async function (t) {
-    t.plan(1);
-
     const batch = db.batch().put('foo', 'bar');
     await batch.write();
 
@@ -124,8 +116,6 @@ exports.args = function (test) {
   });
 
   test('chained batch.write() after close() fails', async function (t) {
-    t.plan(1);
-
     const batch = db.batch().put('foo', 'bar');
     await batch.close();
 

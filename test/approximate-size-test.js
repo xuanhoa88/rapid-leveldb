@@ -11,7 +11,7 @@ test('approximateSize() setup', async function () {
 });
 
 test('approximateSize() throws if arguments are missing', async function (t) {
-  t.plan(2 * 2);
+  t.plan(4);
 
   for (const args of [[], ['foo']]) {
     try {
@@ -52,8 +52,6 @@ test('approximateSize() teardown', async function () {
 });
 
 test('approximateSize() yields error if db is closed', async function (t) {
-  t.plan(1);
-
   try {
     await db.approximateSize('foo', 'foo');
   } catch (err) {

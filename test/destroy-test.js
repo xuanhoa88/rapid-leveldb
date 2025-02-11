@@ -12,7 +12,7 @@ const { LevelDB } = require('../src');
 const makeTest = require('./make');
 
 test('test destroy() without location throws', async function (t) {
-  t.plan(2 * 2);
+  t.plan(4);
 
   for (const args of [[], ['']]) {
     try {

@@ -4,7 +4,7 @@ const test = require('tape');
 const { mockLevel } = require('../util');
 
 test('defer() and deferAsync() require valid function argument', async function (t) {
-  t.plan(6 * 2);
+  t.plan(12);
 
   const db = mockLevel();
 

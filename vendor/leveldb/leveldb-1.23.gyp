@@ -31,7 +31,6 @@
       ]
     },
     "defines": [
-      "LEVELDB_IS_BIG_ENDIAN=0",
       "SNAPPY=1"
     ],
     "include_dirs": [
@@ -58,7 +57,7 @@
           "VCCLCompilerTool": {
             "RuntimeTypeInfo": "false",
             "EnableFunctionLevelLinking": "true",
-            "ExceptionHandling": "2",
+            "ExceptionHandling": "1",
             "DisableSpecificWarnings": [ "4355", "4530" ,"4267", "4244" ]
           }
         }
@@ -74,10 +73,10 @@
           "-fno-builtin-memcmp",
           "-fPIC"
         ],
-        "cflags": [ "-std=c++0x" ],
+        "cflags": ["-std=c++14"],
         "cflags!": [ "-fno-tree-vrp" ]
       }],
-      ["OS != 'win'" and "OS != 'freebsd'", {
+      ["not (OS == 'win' or OS == 'freebsd')", {
         "cflags": [
           "-Wno-sign-compare",
           "-Wno-unused-but-set-variable"
@@ -90,6 +89,8 @@
         "libraries": [
           "-lpthread"
         ],
+        "cflags": ["-std=c++14"],
+        "cflags!": ["-fno-tree-vrp"],
         "ccflags": [
           "-pthread"
         ]
@@ -156,7 +157,7 @@
           "OS_MACOSX=1"
         ],
         "libraries": [],
-        "ccflags": [],
+        "ccflags": ["-std=c++14"],
         "xcode_settings": {
           "WARNING_CFLAGS": [
             "-Wno-sign-compare",
@@ -171,7 +172,10 @@
           "OTHER_CFLAGS": [
             "-arch x86_64",
             "-arch arm64"
-          ]
+          ],
+
+          "CLANG_CXX_LANGUAGE_STANDARD": "c++14",
+          "CLANG_CXX_LIBRARY": "libc++"
         }
       }],
       ["OS == 'android'", {
@@ -187,11 +191,11 @@
           "-fno-builtin-memcmp"
         ],
         "cflags": [
-          "-fPIC"
+          "-fPIC",
+          "-std=c++14"
         ],
         "cflags!": [
           "-fPIE",
-          "-mfloat-abi=hard",
           "-Wno-unused-but-set-variable"
         ]
       }],

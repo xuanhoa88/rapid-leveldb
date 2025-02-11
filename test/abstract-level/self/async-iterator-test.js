@@ -1,12 +1,12 @@
 'use strict';
 
 const test = require('tape');
-const { AbstractLevel, AbstractIterator } = require('../../../src/abstract');
+const { AbstractLevel, AbstractIterator } = require('../../../src/abstract-level');
 const {
   DeferredIterator,
   DeferredKeyIterator,
   DeferredValueIterator,
-} = require('../../lib/deferred-iterator');
+} = require('../../../src/abstract-level/lib/deferred-iterator');
 
 function withIterator(methods) {
   class TestIterator extends AbstractIterator {}

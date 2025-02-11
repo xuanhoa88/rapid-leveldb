@@ -9,8 +9,6 @@ module.exports = function (test, testCommon) {
     for (const type of ['put', 'del']) {
       for (const method of ['batch', 'chained batch', 'singular']) {
         test(`prewrite hook function is called after open (deferred: ${deferred})`, async function (t) {
-          t.plan(1);
-
           const db = testCommon.factory();
           if (!deferred) await db.open();
 
@@ -153,7 +151,7 @@ module.exports = function (test, testCommon) {
   });
 
   test('prewrite hook function can modify put operation', async function (t) {
-    t.plan(10 * 3);
+    t.plan(30);
 
     const db = testCommon.factory({ keyEncoding: 'json', valueEncoding: 'utf8' });
 
@@ -191,7 +189,7 @@ module.exports = function (test, testCommon) {
   });
 
   test('prewrite hook function can modify del operation', async function (t) {
-    t.plan(6 * 3);
+    t.plan(18);
 
     const db = testCommon.factory({ keyEncoding: 'json' });
 
@@ -221,7 +219,7 @@ module.exports = function (test, testCommon) {
   });
 
   test('second prewrite hook function sees modified operation of first', async function (t) {
-    t.plan(6 * 2);
+    t.plan(12);
 
     const db = testCommon.factory();
 
@@ -330,7 +328,7 @@ module.exports = function (test, testCommon) {
   });
 
   test('prewrite hook function can add operations with sublevel option', async function (t) {
-    t.plan(2 * 6);
+    t.plan(12);
 
     const db = testCommon.factory();
     const sublevel = db.sublevel('sub', { keyEncoding: 'json', valueEncoding: 'json' });
@@ -688,7 +686,7 @@ module.exports = function (test, testCommon) {
   });
 
   test('error thrown from prewrite hook function is catched', async function (t) {
-    t.plan(6 * 2);
+    t.plan(12);
 
     const db = testCommon.factory();
 

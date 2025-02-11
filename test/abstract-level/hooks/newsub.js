@@ -24,8 +24,6 @@ module.exports = function (test, testCommon) {
   });
 
   test('newsub hook function receives userland options', async function (t) {
-    t.plan(1);
-
     const db = testCommon.factory();
 
     db.hooks.newsub.add(function (sublevel, options) {

@@ -16,8 +16,6 @@ test('creates location directory recursively', async function (t) {
 });
 
 test('does not create location directory recursively if createIfMissing is false', async function (t) {
-  t.plan(1);
-
   const location = path.join(tempy.directory(), 'beep', 'boop');
   const db = new LevelDB(location, { createIfMissing: false });
   await db.open({ createIfMissing: false });

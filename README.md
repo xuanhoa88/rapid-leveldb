@@ -58,12 +58,10 @@ The `rapid-leveldb` npm package ships with prebuilt binaries for popular 64-bit 
 - **Mac OS** (10.7 and later)
 - **Windows**.
 
-When installing `rapid-leveldb`, [`node-gyp-build`](https://github.com/prebuild/node-gyp-build) will check if a compatible binary exists and fallback to compiling from source if it doesn't. In that case you'll need a [valid `node-gyp` installation](https://github.com/nodejs/node-gyp#installation).
-
-If you don't want to use the prebuilt binary for the platform you are installing on, specify the `--build-from-source` flag when you install:
+When installing `rapid-leveldb`, [`node-gyp rebuild`](https://github.com/nodejs/node-gyp#installation) will compiling from source.
 
 ```
-npm install rapid-leveldb --build-from-source
+npm install rapid-leveldb
 ```
 
 If you are working on `rapid-leveldb` itself and want to recompile the C++ code, run `npm run rebuild`.
@@ -214,23 +212,6 @@ Returns a promise for the completion of the repair operation.
 You will find information on the repair operation in the `LOG` file inside the database directory.
 
 Before calling `repair()`, close a database if it's using the same `location`.
-
-## Development
-
-### Getting Started
-
-This repository uses git submodules. Clone it recursively:
-
-```bash
-git clone --recurse-submodules https://github.com/xuanhoa88/rapid-leveldb.git
-```
-
-Alternatively, initialize submodules inside the working tree:
-
-```bash
-cd rapid-leveldb
-git submodule update --init --recursive
-```
 
 ### Contributing
 
