@@ -1,6 +1,6 @@
 {
   "name": "rapid-leveldb",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "An abstract-level database backed by LevelDB",
   "license": "MIT",
   "gypfile": true,
@@ -48,7 +48,6 @@
     "node-gyp-build": "4.8.4"
   },
   "devDependencies": {
-    "@types/node": "22.7.7",
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
     "cross-env": "7.0.3",
