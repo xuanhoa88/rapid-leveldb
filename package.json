@@ -25,7 +25,7 @@
     "test:gc": "node --expose-gc test/gc.js",
     "test:electron": "electron test/electron.js",
     "test:prebuild": "cross-env PREBUILDS_ONLY=1 npm t",
-    "lint": "eslint '**/*.js'",
+    "lint": "eslint '**/*.{ts,js}' --no-cache",
     "lint:fix": "npm run lint -- --fix",
     "coverage": "nyc report -r lcovonly",
     "rebuild": "node-gyp rebuild && tsc --build",
